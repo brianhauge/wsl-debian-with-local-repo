@@ -6,7 +6,7 @@ export DEBIAN_FRONTEND=noninteractive
 apt-get update -qq
 apt-get install -y -qq --no-install-recommends reprepro gnupg nginx ca-certificates dpkg-dev systemd systemd-sysv sudo curl >/dev/null
 
-printf '[boot]\nsystemd=true\n' > /etc/wsl.conf
+printf '[boot]\nsystemd=true\n\n[user]\ndefault=root\n' > /etc/wsl.conf
 
 # signing key (no passphrase, test only)
 export GNUPGHOME=/srv/repo-gnupg
