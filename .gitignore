@@ -1,0 +1,6 @@
+# VM disk and downloads
+vm/
+download/
+# packages (uploaded to the repo, not versioned)
+repo/incoming/*
+!repo/incoming/.gitkeep

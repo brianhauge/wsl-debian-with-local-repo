@@ -1,0 +1,18 @@
+# debian001 – Debian VM + signed apt repo
+
+VM: WSL2 distro `debian001` (stable), disk in `C:\source\debian001\vm`.
+Repo: reprepro, signed, served by nginx inside the VM on port 8080.
+
+## Use
+1. Drop `.deb` files in `C:\source\debian001\repo\incoming`
+2. Publish:  `wsl -d debian001 -u root repo-upload`
+3. Install:  `wsl -d debian001 -u root`, then `apt-get update && apt-get install <pkg>`
+
+The VM's apt is already configured (`/etc/apt/sources.list.d/debian001.list`).
+Other machines: fetch `http://<host>:8080/debian001.asc`, then
+`deb [signed-by=/usr/share/keyrings/debian001.gpg] http://<host>:8080 stable main`
+(`gpg --dearmor` the .asc, or use /debian001.gpg directly).
+
+Remove a package: `wsl -d debian001 -u root reprepro -b /srv/repo remove stable <pkg>`
+Re-provision from scratch: `wsl -d debian001 -u root bash /mnt/c/source/debian001/repo/provision.sh`
+Delete VM entirely: `wsl --unregister debian001`

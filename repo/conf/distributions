@@ -1,0 +1,8 @@
+Origin: debian001
+Label: debian001
+Codename: stable
+Suite: stable
+Architectures: amd64 arm64 source
+Components: main
+Description: Local test repository
+SignWith: @KEYID@
