@@ -16,3 +16,19 @@ Other machines: fetch `http://<host>:8080/debian001.asc`, then
 Remove a package: `wsl -d debian001 -u root reprepro -b /srv/repo remove stable <pkg>`
 Re-provision from scratch: `wsl -d debian001 -u root bash /mnt/c/source/debian001/repo/provision.sh`
 Delete VM entirely: `wsl --unregister debian001`
+
+## Memory (vmmemWSL)
+All WSL distros (Ubuntu, debian001, Docker Desktop) share one VM, and by default
+it keeps file cache indefinitely, so `vmmemWSL` can grow to many GB. Limit it with
+`C:\Users\<you>\.wslconfig`:
+
+```
+[wsl2]
+memory=6GB
+
+[experimental]
+autoMemoryReclaim=gradual
+```
+
+Apply with `wsl --shutdown` (stops all distros and Docker containers).
+Raise `memory` if containers get OOM-killed.
